@@ -1322,176 +1322,176 @@ body {
 }
 
 /* =========================================================
-   FINAL MOBILE VIEWPORT LOCK
+   FINAL RESPONSIVE FIX
 ========================================================= */
 
+/* Allow the page to use the full screen without clipping content */
 html,
 body {
     width: 100%;
-    height: 100%;
-
-    overflow: hidden !important;
-
-    position: fixed;
-
-    top: 0;
-    left: 0;
-
+    min-height: 100%;
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
 }
-
-
-/* Prevent Safari from moving the page */
 
 body {
-    overscroll-behavior: none;
-    -webkit-overflow-scrolling: auto;
-
-    touch-action: none;
+    position: relative;
+    overflow-y: auto;
 }
 
-
-/* Every main screen stays inside the viewport */
-
-.start-screen,
-.page {
-    position: fixed !important;
-
-    top: 0;
-    left: 0;
-
-    width: 100% !important;
-    height: 100% !important;
-
-    height: 100dvh !important;
-    min-height: 0 !important;
-    max-height: 100dvh !important;
-
-    overflow: hidden !important;
-
-    overscroll-behavior: none;
+/* Main screens */
+.page,
+.start-screen {
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
 }
 
+/* =========================
+   PHOTO FIX
+========================= */
 
-/* Prevent children from creating extra page height */
+.film-frame img {
+    width: 100%;
+    height: 100%;
+    display: block;
 
-.start-content,
-.memory-content,
+    /* Show the complete photo */
+    object-fit: contain;
+
+    background: #090607;
+}
+
+/* =========================
+   CAKE PAGE FIX
+========================= */
+
+.cake-page {
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
 .cake-content {
-    max-height: 100dvh;
-    overflow: hidden;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    height: auto;
+
+    overflow-y: auto;
+
+    padding-top: 15px;
+    padding-bottom: 30px;
 }
 
-
-/* iPhone Safari safe-area handling */
-
-@supports (-webkit-touch-callout: none) {
-
-    .start-screen,
-    .memory-page,
-    .cake-page,
-    .letter-page {
-        height: 100dvh !important;
-        max-height: 100dvh !important;
-
-        padding-top:
-            env(safe-area-inset-top);
-
-        padding-bottom:
-            env(safe-area-inset-bottom);
-    }
+/* Keep cake at a reasonable size */
+.cake-area {
+    flex-shrink: 0;
 }
 
+/* =========================
+   LETTER PAGE FIX
+========================= */
 
-/* =========================================================
-   SMALL PHONE FINAL ADJUSTMENT
-========================================================= */
+.letter-page {
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    height: auto;
+
+    overflow-y: auto;
+}
+
+.letter-container {
+    max-height: none;
+    overflow: visible;
+}
+
+.letter {
+    max-height: none;
+    overflow: visible;
+}
+
+/* =========================
+   SMALL PHONES
+========================= */
 
 @media (max-width: 600px) {
 
-    .memory-content {
-        height: 100dvh !important;
-
-        min-height: 0;
-
-        padding-top:
-            max(5px, env(safe-area-inset-top));
-
-        padding-bottom:
-            max(5px, env(safe-area-inset-bottom));
-
-        overflow: hidden;
-    }
-
-    .memory-content h1 {
-        flex-shrink: 0;
-
-        margin-top: 3px;
-        margin-bottom: 7px;
-    }
-
-    .film-container {
-        flex-shrink: 1;
-
-        height: min(
-            60dvh,
-            580px
-        );
-
-        min-height: 220px;
-
-        max-height: calc(
-            100dvh - 110px
-        );
-    }
-
-
-    /* Cake */
-
     .cake-content {
-        height: 100dvh !important;
+        justify-content: flex-start;
 
-        min-height: 0;
+        padding-top: 12px;
+        padding-bottom: 35px;
+    }
 
-        overflow: hidden;
+    .cake-content h1 {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
 
-        padding-top:
-            max(5px, env(safe-area-inset-top));
-
-        padding-bottom:
-            max(5px, env(safe-area-inset-bottom));
+    .cake-message {
+        margin-top: 5px;
     }
 
     .cake-area {
-        flex-shrink: 1;
-
-        max-height:
-            calc(100dvh - 190px);
+        margin-top: 5px;
     }
 
-
-    /* Letter */
-
     .letter-page {
-        height: 100dvh !important;
+        justify-content: flex-start;
 
-        max-height: 100dvh !important;
-
-        overflow: hidden !important;
+        padding-top: 20px;
+        padding-bottom: 35px;
     }
 
     .letter-container {
-        max-height:
-            calc(100dvh - 30px);
-
-        overflow: hidden;
+        width: 92%;
+        max-height: none;
     }
 
     .letter {
-        max-height:
-            calc(100dvh - 100px);
+        max-height: none;
+        overflow: visible;
+    }
+}
 
-        overflow: hidden;
+/* =========================
+   VERY SMALL PHONES
+========================= */
+
+@media (max-height: 650px) {
+
+    .cake-content {
+        padding-top: 8px;
+        padding-bottom: 25px;
+    }
+
+    .cake-content h1 {
+        font-size: 22px;
+    }
+
+    .cake-message {
+        font-size: 12px;
+        line-height: 1.4;
+    }
+
+    .cake-area {
+        height: 220px;
+        margin-top: 0;
+    }
+
+    .cake {
+        transform:
+            translateX(-50%)
+            scale(.72);
+
+        transform-origin: bottom center;
+    }
+
+    #blowButton {
+        margin-top: 7px;
+        padding: 8px 18px;
     }
 }
