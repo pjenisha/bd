@@ -1,0 +1,1497 @@
+html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    overscroll-behavior: none;
+    touch-action: none;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+    overflow: hidden;
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    overscroll-behavior: none;
+    touch-action: none;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: fixed;
+    inset: 0;
+}
+
+body {
+    background: #120b0d;
+    color: #fffaf7;
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+
+/* =========================
+   GENERAL PAGES
+========================= */
+
+.page,
+.start-screen {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.small-text {
+    color: #d99591;
+    font-size: clamp(10px, 1.5vw, 14px);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+
+/* =========================
+   START SCREEN
+========================= */
+
+.start-screen {
+    text-align: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #35151c 0%,
+            #1d0d11 45%,
+            #120b0d 100%
+        );
+
+    z-index: 100;
+
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
+}
+
+.start-screen::before,
+.start-screen::after {
+    content: "♡";
+
+    position: absolute;
+
+    color: rgba(217,149,145,.18);
+
+    font-size: clamp(70px, 12vw, 120px);
+
+    pointer-events: none;
+}
+
+.start-screen::before {
+    top: 8%;
+    left: 8%;
+}
+
+.start-screen::after {
+    bottom: 8%;
+    right: 8%;
+}
+
+.start-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.start-content {
+    width: min(90%, 700px);
+
+    padding:
+        max(20px, env(safe-area-inset-top))
+        20px
+        max(20px, env(safe-area-inset-bottom))
+        20px;
+
+    text-align: center;
+}
+
+.start-content h1 {
+    font-size: clamp(38px, 7vw, 58px);
+    font-weight: normal;
+
+    margin: 18px 0 15px;
+}
+
+.start-content > p:not(.small-text) {
+    color: #d8c4c3;
+
+    font-size: clamp(14px, 2vw, 16px);
+
+    margin-bottom: 30px;
+}
+
+#startButton {
+    padding: 13px 28px;
+
+    border: 1px solid #d99591;
+    border-radius: 40px;
+
+    background: transparent;
+    color: #fffaf7;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+
+/* =========================
+   SONG MESSAGE
+========================= */
+
+#songMessage {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 25px;
+
+    background: #120b0d;
+
+    color: #fffaf7;
+
+    font-size: clamp(20px, 4vw, 27px);
+
+    letter-spacing: 1px;
+
+    z-index: 200;
+
+    opacity: 1;
+
+    transition: opacity .6s ease;
+}
+
+
+/* =========================================================
+   MEMORY PAGE
+========================================================= */
+
+.memory-page {
+    display: none;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #32141b,
+            #120b0d 70%
+        );
+}
+
+.memory-page.active {
+    display: flex;
+}
+
+.memory-content {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    padding:
+        max(8px, env(safe-area-inset-top))
+        8px
+        max(8px, env(safe-area-inset-bottom))
+        8px;
+
+    overflow: hidden;
+}
+
+.memory-content .small-text {
+    margin-bottom: 5px;
+}
+
+.memory-content h1 {
+    font-size: clamp(23px, 4vw, 38px);
+
+    font-weight: normal;
+
+    margin: 5px 0 10px;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   FILM CONTAINER
+========================================================= */
+
+.film-container {
+    position: relative;
+
+    /*
+       Width is limited by BOTH
+       screen width and height.
+    */
+
+    width: min(78vw, 340px);
+
+    /*
+       The film can never become
+       taller than the available screen.
+    */
+
+    height: min(
+        66vh,
+        620px
+    );
+
+    min-height: 250px;
+
+    overflow: hidden;
+
+    border-left: 9px solid #8e2d3d;
+    border-right: 9px solid #8e2d3d;
+
+    background: #090607;
+
+    box-shadow:
+        0 0 35px rgba(0,0,0,.75);
+
+    flex-shrink: 1;
+}
+
+
+/* =========================
+   FILM HOLES
+========================= */
+
+.film-container::before,
+.film-container::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 27px;
+
+    z-index: 10;
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #fffaf7 0,
+            #fffaf7 13px,
+            transparent 13px,
+            transparent 26px
+        );
+
+    opacity: .9;
+
+    pointer-events: none;
+}
+
+.film-container::before {
+    top: 0;
+}
+
+.film-container::after {
+    bottom: 0;
+}
+
+
+/* =========================
+   FILM STRIP
+========================= */
+
+.film-strip {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 10px;
+
+    animation:
+        filmMoveVertical 18s linear forwards;
+
+    will-change: transform;
+}
+
+
+/* =========================
+   FILM FRAME
+========================= */
+
+.film-frame {
+    flex-shrink: 0;
+
+    width: calc(100% - 22px);
+
+    /*
+       Photo height automatically
+       adjusts with screen height.
+    */
+
+    height: clamp(
+        125px,
+        18vh,
+        185px
+    );
+
+    padding: 4px;
+
+    background: #171011;
+
+    border: 1px solid #d99591;
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.6);
+
+    overflow: hidden;
+}
+
+.film-frame img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+
+/* =========================
+   FILM MOVEMENT
+========================= */
+
+@keyframes filmMoveVertical {
+
+    0% {
+        transform: translateY(5%);
+    }
+
+    100% {
+        transform: translateY(-100%);
+    }
+
+}
+
+
+/* =========================================================
+   CAKE PAGE
+========================================================= */
+
+.cake-page {
+    display: none;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #35151c,
+            #120b0d 75%
+        );
+
+    text-align: center;
+}
+
+.cake-page.show {
+    display: flex;
+}
+
+.cake-content {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    padding:
+        max(8px, env(safe-area-inset-top))
+        10px
+        max(8px, env(safe-area-inset-bottom))
+        10px;
+
+    overflow: hidden;
+}
+
+.cake-content h1 {
+    font-size: clamp(24px, 4vw, 36px);
+
+    font-weight: normal;
+
+    margin-top: 10px;
+
+    padding: 0 12px;
+
+    flex-shrink: 0;
+}
+
+.cake-message {
+    color: #d8c4c3;
+
+    font-size: clamp(12px, 2vw, 15px);
+
+    line-height: 1.6;
+
+    margin-top: 8px;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   CAKE AREA
+========================================================= */
+
+.cake-area {
+    position: relative;
+
+    /*
+       The cake area itself scales
+       according to the smaller screen.
+    */
+
+    width: min(
+        360px,
+        80vw
+    );
+
+    height: min(
+        290px,
+        42vh
+    );
+
+    margin-top: 10px;
+
+    flex-shrink: 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cake {
+    position: absolute;
+
+    width: 320px;
+    height: 250px;
+
+    left: 50%;
+    bottom: 0;
+
+    transform:
+        translateX(-50%)
+        scale(
+            min(
+                1,
+                80vw / 360px,
+                42vh / 290px
+            )
+        );
+
+    transform-origin: bottom center;
+}
+
+
+/* =========================
+   BOTTOM TIER
+========================= */
+
+.bottom-tier {
+    position: absolute;
+
+    width: 300px;
+    height: 105px;
+
+    left: 50%;
+    bottom: 15px;
+
+    transform: translateX(-50%);
+
+    border-radius: 50% / 22%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #450b13,
+            #68151e 15%,
+            #8e2932 35%,
+            #68151e 52%,
+            #972d35 72%,
+            #5b1119 88%,
+            #400910
+        );
+
+    box-shadow:
+        inset 12px 0 18px rgba(0,0,0,.22),
+        inset -12px 0 18px rgba(0,0,0,.22),
+        0 18px 25px rgba(0,0,0,.55);
+
+    z-index: 2;
+}
+
+.bottom-frosting {
+    position: absolute;
+
+    width: 306px;
+    height: 38px;
+
+    left: 50%;
+    top: -13px;
+
+    transform: translateX(-50%);
+
+    border-radius: 50%;
+
+    background: #fffaf7;
+
+    z-index: 5;
+}
+
+.bottom-drip {
+    position: absolute;
+
+    top: -2px;
+
+    width: 18px;
+
+    background: #fffaf7;
+
+    border-radius: 0 0 12px 12px;
+
+    z-index: 7;
+}
+
+.bottom-tier .drip-one {
+    left: 48px;
+    height: 28px;
+}
+
+.bottom-tier .drip-two {
+    left: 112px;
+    height: 20px;
+}
+
+.bottom-tier .drip-three {
+    right: 105px;
+    height: 34px;
+}
+
+.bottom-tier .drip-four {
+    right: 48px;
+    height: 23px;
+}
+
+
+/* =========================================================
+   TOP TIER
+========================================================= */
+
+.top-tier {
+    position: absolute;
+
+    width: 205px;
+    height: 82px;
+
+    left: 50%;
+    bottom: 92px;
+
+    transform: translateX(-50%);
+
+    border-radius: 50% / 25%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #4b0c14,
+            #79202a 20%,
+            #972c34 42%,
+            #68151d 58%,
+            #90262f 80%,
+            #4b0c14
+        );
+
+    box-shadow:
+        inset 8px 0 14px rgba(0,0,0,.2),
+        inset -8px 0 14px rgba(0,0,0,.2),
+        0 10px 18px rgba(0,0,0,.4);
+
+    z-index: 8;
+}
+
+.top-frosting {
+    position: absolute;
+
+    width: 211px;
+    height: 34px;
+
+    left: 50%;
+    top: -12px;
+
+    transform: translateX(-50%);
+
+    border-radius: 50%;
+
+    background: #fffaf7;
+
+    z-index: 10;
+}
+
+.top-drip {
+    position: absolute;
+
+    top: -1px;
+
+    width: 16px;
+
+    background: #fffaf7;
+
+    border-radius: 0 0 11px 11px;
+
+    z-index: 12;
+}
+
+.top-tier .drip-one {
+    left: 38px;
+    height: 22px;
+}
+
+.top-tier .drip-two {
+    left: 94px;
+    height: 31px;
+}
+
+.top-tier .drip-three {
+    right: 37px;
+    height: 20px;
+}
+
+
+/* =========================================================
+   VINTAGE PIPING
+========================================================= */
+
+.pipe {
+    position: absolute;
+
+    border: 5px solid #fffaf7;
+
+    z-index: 20;
+}
+
+.pipe-bottom-top {
+    width: 265px;
+    height: 35px;
+
+    left: 50%;
+    top: 0;
+
+    transform: translateX(-50%);
+
+    border-radius: 50%;
+
+    border-bottom-color: transparent;
+}
+
+.pipe-bottom-left {
+    width: 70px;
+    height: 45px;
+
+    left: 12px;
+    bottom: 13px;
+
+    border-radius: 50%;
+
+    transform: rotate(-8deg);
+}
+
+.pipe-bottom-right {
+    width: 70px;
+    height: 45px;
+
+    right: 12px;
+    bottom: 13px;
+
+    border-radius: 50%;
+
+    transform: rotate(8deg);
+}
+
+.top-pipe {
+    position: absolute;
+
+    z-index: 22;
+
+    border: 4px solid #fffaf7;
+}
+
+.top-pipe-left {
+    width: 55px;
+    height: 34px;
+
+    left: 17px;
+    top: 20px;
+
+    border-radius: 50%;
+
+    transform: rotate(-10deg);
+}
+
+.top-pipe-right {
+    width: 55px;
+    height: 34px;
+
+    right: 17px;
+    top: 20px;
+
+    border-radius: 50%;
+
+    transform: rotate(10deg);
+}
+
+.top-pipe-center {
+    width: 75px;
+    height: 38px;
+
+    left: 50%;
+    top: 25px;
+
+    transform: translateX(-50%);
+
+    border-radius: 50%;
+}
+
+
+/* =========================================================
+   CAKE DECORATIONS
+========================================================= */
+
+.cake-decoration {
+    position: absolute;
+
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+
+    background: #fffaf7;
+
+    z-index: 25;
+}
+
+.dot-one {
+    left: 38px;
+    top: 62px;
+}
+
+.dot-two {
+    left: 88px;
+    top: 74px;
+
+    background: #d99591;
+}
+
+.dot-three {
+    left: 145px;
+    top: 64px;
+}
+
+.dot-four {
+    right: 85px;
+    top: 74px;
+
+    background: #d99591;
+}
+
+.dot-five {
+    right: 38px;
+    top: 62px;
+}
+
+
+/* =========================================================
+   CANDLE
+========================================================= */
+
+.candle {
+    position: absolute;
+
+    width: 24px;
+    height: 110px;
+
+    left: 50%;
+    top: 8px;
+
+    transform: translateX(-50%);
+
+    z-index: 50;
+}
+
+.candle-body {
+    position: absolute;
+
+    width: 15px;
+    height: 62px;
+
+    left: 50%;
+    bottom: 0;
+
+    transform: translateX(-50%);
+
+    border-radius: 5px;
+
+    background:
+        repeating-linear-gradient(
+            120deg,
+            #fffaf7 0,
+            #fffaf7 5px,
+            #d99591 5px,
+            #d99591 9px
+        );
+
+    box-shadow:
+        inset -3px 0 5px rgba(0,0,0,.15),
+        2px 4px 7px rgba(0,0,0,.35);
+}
+
+.wick {
+    position: absolute;
+
+    width: 3px;
+    height: 9px;
+
+    left: 50%;
+    bottom: 61px;
+
+    transform: translateX(-50%);
+
+    background: #222;
+
+    border-radius: 50%;
+
+    z-index: 5;
+}
+
+.flame {
+    position: absolute;
+
+    width: 19px;
+    height: 29px;
+
+    left: 50%;
+    bottom: 68px;
+
+    transform: translateX(-50%);
+
+    background:
+        radial-gradient(
+            ellipse at 50% 70%,
+            #fffaf7 0 20%,
+            #ffd59c 21% 45%,
+            #e76f51 46% 72%,
+            #d99591 73%
+        );
+
+    border-radius:
+        50% 50% 50% 50% /
+        65% 65% 35% 35%;
+
+    box-shadow:
+        0 0 10px #d99591,
+        0 0 25px rgba(217,149,145,.7);
+
+    animation:
+        flameFlicker .8s ease-in-out infinite alternate;
+}
+
+.flame::after {
+    content: "";
+
+    position: absolute;
+
+    width: 6px;
+    height: 11px;
+
+    left: 50%;
+    bottom: 3px;
+
+    transform: translateX(-50%);
+
+    background: #fffaf7;
+
+    border-radius: 50%;
+}
+
+@keyframes flameFlicker {
+
+    from {
+        transform:
+            translateX(-50%)
+            rotate(-3deg)
+            scale(1);
+    }
+
+    to {
+        transform:
+            translateX(-50%)
+            rotate(3deg)
+            scale(1.08);
+    }
+}
+
+
+/* =========================================================
+   BLOW SECTION
+========================================================= */
+
+.blow-hint {
+    color: #d99591;
+
+    font-size: clamp(11px, 2vw, 14px);
+
+    letter-spacing: 2px;
+
+    margin-top: 0;
+
+    animation:
+        hintPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes hintPulse {
+
+    0%,
+    100% {
+        opacity: .5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+#blowButton {
+    margin-top: 14px;
+
+    padding: 11px 23px;
+
+    border: 1px solid #d99591;
+
+    border-radius: 30px;
+
+    background: transparent;
+
+    color: #fffaf7;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+
+/* =========================================================
+   SMOKE
+========================================================= */
+
+.smoke {
+    position: absolute;
+
+    width: 14px;
+    height: 14px;
+
+    left: 50%;
+    top: 38%;
+
+    transform: translateX(-50%);
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,250,247,.45);
+
+    animation:
+        smokeRise 1.5s ease-out forwards;
+
+    pointer-events: none;
+}
+
+@keyframes smokeRise {
+
+    0% {
+        opacity: .7;
+
+        transform:
+            translateX(-50%)
+            translateY(0)
+            scale(.7);
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translateX(-50%)
+            translateY(-50px)
+            scale(2);
+    }
+}
+
+
+/* =========================================================
+   LETTER
+========================================================= */
+
+.letter-page {
+    display: none;
+
+    text-align: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #35151c,
+            #120b0d 75%
+        );
+
+    padding:
+        20px
+        15px
+        max(20px, env(safe-area-inset-bottom))
+        15px;
+}
+
+.letter-page.show {
+    display: flex;
+}
+
+.letter-container {
+    width: min(90%, 650px);
+}
+
+.letter-container > .small-text {
+    margin-bottom: 15px;
+}
+
+.letter {
+    padding: clamp(25px, 5vw, 45px);
+
+    border:
+        1px solid rgba(217,149,145,.45);
+
+    background:
+        rgba(38,17,22,.85);
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.45);
+
+    position: relative;
+
+    max-height: 75vh;
+
+    overflow: hidden;
+}
+
+.letter::before,
+.letter::after {
+    content: "♡";
+
+    position: absolute;
+
+    color:
+        rgba(217,149,145,.35);
+
+    font-size: 30px;
+}
+
+.letter::before {
+    top: 15px;
+    left: 18px;
+}
+
+.letter::after {
+    bottom: 15px;
+    right: 18px;
+}
+
+.letter h1 {
+    font-size: clamp(26px, 5vw, 40px);
+
+    font-weight: normal;
+
+    color: #fffaf7;
+
+    margin-bottom: 20px;
+}
+
+.letter p {
+    color: #d8c4c3;
+
+    font-size: clamp(13px, 2vw, 16px);
+
+    line-height: 1.7;
+
+    margin-bottom: 15px;
+}
+
+.letter .letter-end {
+    color: #d99591;
+
+    margin-top: 20px;
+}
+
+
+/* =========================================================
+   VERY SHORT DEVICES
+========================================================= */
+
+@media (max-height: 650px) {
+
+    .memory-content h1 {
+        font-size: 22px;
+        margin: 3px 0 5px;
+    }
+
+    .film-container {
+        height: 62vh;
+        min-height: 230px;
+    }
+
+    .film-frame {
+        height: 115px;
+    }
+
+    .film-strip {
+        gap: 7px;
+    }
+
+    .cake-content h1 {
+        font-size: 22px;
+        margin-top: 4px;
+    }
+
+    .cake-message {
+        font-size: 12px;
+        line-height: 1.4;
+        margin-top: 4px;
+    }
+
+    .cake-area {
+        height: 220px;
+        margin-top: 0;
+    }
+
+    .cake {
+        transform:
+            translateX(-50%)
+            scale(.72);
+
+        transform-origin: bottom center;
+    }
+
+    #blowButton {
+        margin-top: 7px;
+        padding: 8px 18px;
+    }
+}
+
+
+/* =========================================================
+   VERY NARROW PHONES
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .film-container {
+        width: 86vw;
+    }
+
+    .film-frame {
+        width: calc(100% - 18px);
+    }
+
+    .cake {
+        transform:
+            translateX(-50%)
+            scale(.62);
+
+        transform-origin: bottom center;
+    }
+
+    .letter {
+        padding: 25px 18px;
+    }
+}
+
+
+/* =========================================================
+   LANDSCAPE PHONE
+========================================================= */
+
+@media (orientation: landscape) and (max-height: 600px) {
+
+    .memory-content {
+        flex-direction: column;
+    }
+
+    .film-container {
+        height: 75vh;
+        width: min(35vw, 300px);
+    }
+
+    .film-frame {
+        height: 110px;
+    }
+
+    .cake-area {
+        height: 180px;
+    }
+
+    .cake {
+        transform:
+            translateX(-50%)
+            scale(.55);
+
+        transform-origin: bottom center;
+    }
+
+    .cake-message {
+        margin-top: 3px;
+    }
+}
+
+/* =========================================================
+   FINAL MOBILE VIEWPORT LOCK
+========================================================= */
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden !important;
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Prevent Safari from moving the page */
+
+body {
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: auto;
+
+    touch-action: none;
+}
+
+
+/* Every main screen stays inside the viewport */
+
+.start-screen,
+.page {
+    position: fixed !important;
+
+    top: 0;
+    left: 0;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    height: 100dvh !important;
+    min-height: 0 !important;
+    max-height: 100dvh !important;
+
+    overflow: hidden !important;
+
+    overscroll-behavior: none;
+}
+
+
+/* Prevent children from creating extra page height */
+
+.start-content,
+.memory-content,
+.cake-content {
+    max-height: 100dvh;
+    overflow: hidden;
+}
+
+
+/* iPhone Safari safe-area handling */
+
+@supports (-webkit-touch-callout: none) {
+
+    .start-screen,
+    .memory-page,
+    .cake-page,
+    .letter-page {
+        height: 100dvh !important;
+        max-height: 100dvh !important;
+
+        padding-top:
+            env(safe-area-inset-top);
+
+        padding-bottom:
+            env(safe-area-inset-bottom);
+    }
+}
+
+
+/* =========================================================
+   SMALL PHONE FINAL ADJUSTMENT
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .memory-content {
+        height: 100dvh !important;
+
+        min-height: 0;
+
+        padding-top:
+            max(5px, env(safe-area-inset-top));
+
+        padding-bottom:
+            max(5px, env(safe-area-inset-bottom));
+
+        overflow: hidden;
+    }
+
+    .memory-content h1 {
+        flex-shrink: 0;
+
+        margin-top: 3px;
+        margin-bottom: 7px;
+    }
+
+    .film-container {
+        flex-shrink: 1;
+
+        height: min(
+            60dvh,
+            580px
+        );
+
+        min-height: 220px;
+
+        max-height: calc(
+            100dvh - 110px
+        );
+    }
+
+
+    /* Cake */
+
+    .cake-content {
+        height: 100dvh !important;
+
+        min-height: 0;
+
+        overflow: hidden;
+
+        padding-top:
+            max(5px, env(safe-area-inset-top));
+
+        padding-bottom:
+            max(5px, env(safe-area-inset-bottom));
+    }
+
+    .cake-area {
+        flex-shrink: 1;
+
+        max-height:
+            calc(100dvh - 190px);
+    }
+
+
+    /* Letter */
+
+    .letter-page {
+        height: 100dvh !important;
+
+        max-height: 100dvh !important;
+
+        overflow: hidden !important;
+    }
+
+    .letter-container {
+        max-height:
+            calc(100dvh - 30px);
+
+        overflow: hidden;
+    }
+
+    .letter {
+        max-height:
+            calc(100dvh - 100px);
+
+        overflow: hidden;
+    }
+}
