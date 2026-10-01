@@ -34,6 +34,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
         startScreen.classList.add("hidden");
 
+        /*
+         * Start the music immediately inside the button click.
+         * This is important for Safari because music started
+         * after a setTimeout may be blocked by autoplay rules.
+         */
+        if (music) {
+            music.play().catch(function (error) {
+                console.log("Music could not start:", error);
+            });
+        }
+
         const songMessage = document.createElement("div");
 
         songMessage.id = "songMessage";
@@ -42,10 +53,6 @@ document.addEventListener("DOMContentLoaded", function () {
         document.body.appendChild(songMessage);
 
         setTimeout(function () {
-
-            if (music) {
-                music.play().catch(function () {});
-            }
 
             songMessage.style.opacity = "0";
 
